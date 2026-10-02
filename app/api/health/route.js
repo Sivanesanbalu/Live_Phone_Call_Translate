@@ -1,1 +1,0 @@
-export async function GET(){return Response.json({status:'ok',service:'Live Phone Call Translate',version:'1.0.0',realtimeGateway:'pending-provider-configuration',timestamp:new Date().toISOString()})}
