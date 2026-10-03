@@ -1,10 +1,2 @@
-import { providerStatus } from '@/lib/providers';
-export const dynamic = 'force-dynamic';
-export async function GET() {
-  const realtimeConfigured = Boolean(process.env.LIVEKIT_URL && process.env.LIVEKIT_API_KEY && process.env.LIVEKIT_API_SECRET);
-  return Response.json({
-    status: 'ok', service: 'Live Phone Call Translate', version: '1.1.0',
-    realtime: { provider: 'livekit', configured: realtimeConfigured },
-    ai: providerStatus(), timestamp: new Date().toISOString()
-  });
-}
+import { providerStatus } from '@/lib/providers';export const dynamic='force-dynamic';
+export async function GET(){const realtime=Boolean(process.env.LIVEKIT_URL&&process.env.LIVEKIT_API_KEY&&process.env.LIVEKIT_API_SECRET);const calls=Boolean(process.env.CALL_SIGNING_SECRET);const ai=providerStatus();return Response.json({status:realtime&&calls&&ai.stt.configured&&ai.translation.configured&&ai.tts.configured?'ready':'configuration_required',service:'Live Phone Call Translate',version:'2.0.0',realtime:{provider:'livekit',configured:realtime},calls:{configured:calls},ai,timestamp:new Date().toISOString()});}
